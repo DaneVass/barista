@@ -1,0 +1,37 @@
+Package: barista
+Type: Package
+Title: Tools for the Analysis and Visualisation of Lineage Tracing Barcodes
+Version: 0.3.0
+Authors@R: person("Dane", "Vassilaidis", email = "dane.vassiliadis@petermac.org",
+                  role = c("aut", "cre"))
+Maintainer: Dane Vassiliadis <dane.vassiliadis@petermac.org>
+Description: A toolkit for the analysis and visualisation of lineage tracing
+    experiments using DNA barcodes. Additionally, a series of functions to link DNA barcoding 
+    results with scRNA-seq/scATAC-seq datasets is provided. 
+License: GPL3
+Encoding: UTF-8
+LazyData: true
+Suggests: 
+    testthat,
+    knitr,
+    rmarkdown
+Imports: 
+    plyr,
+    dplyr,
+    reshape2,
+    ggplot2,
+    Rbowtie,
+    Rsamtools,
+    ShortRead,
+    Biostrings,
+    seqinr,
+    Rsubread,
+    stringr,
+    vegan,
+    ineq,
+    viridis,
+    edgeR,
+    BiocGenerics,
+    ggrepel
+RoxygenNote: 7.1.1
+VignetteBuilder: knitr

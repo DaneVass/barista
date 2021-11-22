@@ -1,0 +1,51 @@
+---
+output: github_document
+---
+
+<!-- README.md is generated from README.Rmd. Please edit that file -->
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>",
+  fig.path = "man/figures/README-",
+  out.width = "100%"
+)
+```
+
+# barista
+
+<!-- badges: start -->
+<!-- badges: end -->
+
+barista is an R-based toolkit for the analysis of synthetic barcodes in the genome and transcriptome
+
+## Installation
+
+You can install the development version of barista from [GitHub](https://github.com/) with:
+
+``` r
+# install.packages("devtools")
+devtools::install_github("DaneVass/barista")
+```
+
+## Examples
+
+`barista` can preprocess, normalise and visualise all types of synthetic barcode count data. 
+
+```{r example}
+library(barista)
+
+## plot from DGEList objects
+barista::calcReplicateCorr(test.dge)
+barista::plotDistances()
+
+## plot from counts files
+plotBarcodeBubble(test.counts)
+plotBarcodeCounts(test.counts)
+plotBarcodeHistogram(test.counts, sample = "T0-1", top = 100)
+plotReadCounts(test.counts, group = c("A", "A", "B", "B"))
+
+```
+
+
