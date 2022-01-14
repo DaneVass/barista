@@ -4,7 +4,7 @@
 \alias{annotateBarcodeReads}
 \title{Annotate Barcode Reads}
 \usage{
-annotateBarcodeReads(all.cells, cells.w.barcode.df)
+annotateBarcodeReads(all.cells, barcoded.cells)
 }
 \arguments{
 \item{all.cells}{list of all cells in the experiment to be annotated}

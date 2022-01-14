@@ -4,10 +4,16 @@
 \alias{calcReplicateCorr}
 \title{Calculate correlation between technical replicates}
 \usage{
-calcReplicateCorr(dge, group, corr.thresh = 0.8, return = "good")
+calcReplicateCorr(dge, group, corr.thresh = 0.8, return = "all")
 }
 \arguments{
 \item{dge}{DGEList object containing technical replicates to be compared}
+
+\item{group}{grouping variable from metadata containing technical replicate information}
+
+\item{corr.thresh}{threshold distinguishing good vs bad correlation between technical replicates}
+
+\item{return}{which values to return. One of "good", "bad", "all"}
 }
 \value{
 Returns a plot of the read counts per barcode (row) in a data frame
@@ -16,6 +22,6 @@ Returns a plot of the read counts per barcode (row) in a data frame
 Calculate and return list of correlation between paired technical replicates in a dataset
 }
 \examples{
-calcReplicateCor(dge, group = group)
-
+data(test.dge)
+calcReplicateCorr(test.dge, group = "group")
 }

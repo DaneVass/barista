@@ -8,6 +8,10 @@ plotBarcodeCounts(counts, order = F, log10 = F)
 }
 \arguments{
 \item{counts}{data.frame of barcode count x sample}
+
+\item{order}{Logical. Order the dataset be decreasing abundance}
+
+\item{log10}{Logical. log10 transform the data. Adds a pseudocount of 1}
 }
 \value{
 Returns a plot of the read counts per barcode (row) in a data frame
@@ -16,6 +20,8 @@ Returns a plot of the read counts per barcode (row) in a data frame
 Simple plot of total read counts per barcode in library
 }
 \examples{
-plotBarcodeCounts(counts)
-
+data(test.counts)
+plotBarcodeCounts(test.counts)
+plotBarcodeCounts(test.counts, order = TRUE)
+plotBarcodeCounts(test.counts, order = TRUE, log10 = TRUE)
 }

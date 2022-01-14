@@ -15,8 +15,3 @@ Returns a matrix of correlation values with columns and rows hierarchically clus
 \description{
 cluster a correlation matrix using hierarchical clustering
 }
-\examples{
-test.mat <- matrix(rnorm(10*10,mean=0,sd=2), 10, 10)
-cluster_cormat(test.mat)
-
-}

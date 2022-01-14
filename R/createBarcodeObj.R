@@ -5,10 +5,8 @@
 #' @param sampleanno annotation file detailing sample ID and groups
 #' @return A data frame containing barcode counts in rows per sample in columns.
 #' @export
-#' @examples
-#' process_barcode_counts(counts.dir = "counts/", sampleanno)
 
-process_barcode_counts <- function(counts.dir = "counts/", sampleanno){
+createBarcodeObj <- function(counts.dir = "counts/", sampleanno = NULL){
   counts <- readDGE(files = list.files(counts.dir), path = counts.dir, group = sampleanno$group, labels = sampleanno$ID)
   counts$samples$replicate <- sampleanno$Replicate
   dim(counts)

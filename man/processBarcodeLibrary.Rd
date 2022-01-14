@@ -5,14 +5,21 @@
 \title{processBarcodeLibrary}
 \usage{
 processBarcodeLibrary(
-  filepath = NULL,
+  file = NULL,
   samplename = "Barcode",
   cutoff = 10,
-  header = F
+  header = FALSE,
+  outdir = tempdir()
 )
 }
 \arguments{
-\item{filepath}{path to starcode output for barcode library}
+\item{file}{path to starcode output for barcode library}
+
+\item{samplename}{name of reference library. Will be prefixed to each barcode in the reference}
+
+\item{cutoff}{rowsum cutoff defining barcodes to keep in the reference library}
+
+\item{header}{Logical. Does the input file contain a header line}
 }
 \value{
 returns data frame containing barcode and read count in reference
@@ -21,5 +28,6 @@ returns data frame containing barcode and read count in reference
 process barcode reference file from raw sequencing datasets
 }
 \examples{
-process_barcode_reference(filepath = NULL)
+load(system.file("extdata", "test_raw_lib.rda", package = "barista"))
+processBarcodeLibrary(file = test.raw.lib, samplename = "Barcode", outdir = tempdir())
 }

@@ -30,6 +30,7 @@ Returns a plot of the read counts per column (sample) in a data frame
 Simple plot of total read counts per sample
 }
 \examples{
-plotBarcodeFrequency(barcodes, samplename = "test sample")
+data(test.counts)
+plotReadCounts(test.dge$counts, group = test.dge$samples$Group)
 
 }

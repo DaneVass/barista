@@ -3,16 +3,19 @@
 #' Calculate and return list of correlation between paired technical replicates in a dataset
 #'
 #' @param dge DGEList object containing technical replicates to be compared
+#' @param group grouping variable from metadata containing technical replicate information
+#' @param corr.thresh threshold distinguishing good vs bad correlation between technical replicates
+#' @param return which values to return. One of "good", "bad", "all"
 #'
 #' @return Returns a plot of the read counts per barcode (row) in a data frame
 #' @export
 #'
 #' @examples
-#' calcReplicateCor(dge, group = group)
-#'
+#' data(test.dge)
+#' calcReplicateCorr(test.dge, group = "group")
 
 # get paired technical replicates
-calcReplicateCorr <- function(dge, group, corr.thresh = 0.8, return = "good"){
+calcReplicateCorr <- function(dge, group, corr.thresh = 0.8, return = "all"){
   #if(return != "all" | return != "good" | return != "bad"){
   #  stop("return must be one of all, good or bad")
   #}

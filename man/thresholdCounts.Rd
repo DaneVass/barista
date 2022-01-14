@@ -21,5 +21,5 @@ Threshold dataframe to a given level and return number of barcodes meeting thres
 sample.
 }
 \examples{
-thresholdCounts(df, threshold = 20, plot = FALSE)
+thresholdCounts(test.counts, threshold = 20, plot = FALSE)
 }

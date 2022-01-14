@@ -10,11 +10,11 @@
 #'
 #' @export
 #' @examples
-#' thresholdCounts(df, threshold = 20, plot = FALSE)
+#' thresholdCounts(test.counts, threshold = 20, plot = FALSE)
 
 thresholdCounts <- function(df, threshold = 20, plot = FALSE){
 
-  if(!isnull(threshold)){
+  if(!is.null(threshold)){
     threshold <- threshold
   } else {
     message("No threshold given, defaulting to 20.")
@@ -25,21 +25,22 @@ thresholdCounts <- function(df, threshold = 20, plot = FALSE){
   above.threshold.counts <- data.frame(Sample=factor(), Count=c())
 
   for(sample in colnames(df)){
-    above.threshold = length(which(df$counts[,sample] >= threshold))
+    above.threshold = length(which(df[,sample] >= threshold))
     d <- data.frame(Sample=factor(sample),Count=above.threshold)
     above.threshold.counts <- rbind(above.threshold.counts, d)
-    print(paste(sample, sum(above.threshold)))
   }
 
   if(plot == FALSE){
     return(above.threshold.counts)
   } else {
-    g <- ggplot(above.threshold.counts[which(grepl("BR1", above.threshold.counts$Sample)==TRUE),],
-                aes(x=Sample,y=Count))
-    g + geom_bar(stat = "identity") +
-      theme(panel.grid.major.x=element_line(colour="grey70")) +
-      labs(title = paste("Number of barcodes present per conditon. Threshold:", threshold)) +
-             xlab("Condition") + ylab("Total number of barcodes") +
-             theme_bw() + theme(axis.text.x = element_text(angle = 45, hjust = 1))
+    g <- ggplot2::ggplot(above.threshold.counts, ggplot2::aes(x=Sample,y=Count))
+
+    g + ggplot2::geom_bar(stat = "identity") +
+      ggplot2::theme(panel.grid.major.x=ggplot2::element_line(colour="grey70")) +
+      ggplot2::labs(title = paste("Number of barcodes meeting threshold:", threshold)) +
+      ggplot2::xlab("Sample") +
+      ggplot2::ylab("Number of barcodes") +
+      ggplot2::theme_bw() +
+      ggplot2::theme(axis.text.x = ggplot2::element_text(angle = 45, hjust = 1))
   }
 }

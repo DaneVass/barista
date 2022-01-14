@@ -2,7 +2,7 @@
 % Please edit documentation in R/plotBarcodeBubble.R
 \name{plotBarcodeBubble}
 \alias{plotBarcodeBubble}
-\title{proportionalBubbleplot}
+\title{plotBarcodeBubble}
 \usage{
 plotBarcodeBubble(
   counts.obj,
@@ -27,5 +27,7 @@ Returns a bubbleplot of barcodes represented by proportion of total pool
 Generate proportional bubbleplots from raw count object with barcodes labelled above a specified threshold
 }
 \examples{
-proportionalBubbleplot(counts.obj, name = "Proportional Bubble Plot", label = T, proportion.cutoff = 10)
+data(test.counts)
+plotBarcodeBubble(test.counts, labels = TRUE, proportion.cutoff = 10)
+plotBarcodeBubble(test.counts, labels = FALSE, proportion.cutoff = 10)
 }

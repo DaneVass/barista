@@ -17,9 +17,7 @@
 #' @importFrom ineq Gini
 #' @export
 #' @examples
-#' indexes <- calcDivIndexes(df = counts.df)
-
-dat <- dge.collapsed$counts
+#' indexes <- calcDivIndexes(dat = test.counts)
 
 calcDivIndexes <- function(dat){
   colnames <- colnames(dat)
@@ -27,10 +25,10 @@ calcDivIndexes <- function(dat){
                    invsimpson = as.numeric(), gini = as.numeric())
   for (i in 1:length(colnames(dat))) {
     name <- colnames(dat)[i]
-    shannon <- diversity(dat[, i], index = "shannon")
-    simpson <- diversity(dat[, i], index = "simpson")
-    invsimpson <- diversity(dat[, i], index = "invsimpson")
-    gini <- Gini(dat[, i])
+    shannon <- vegan::diversity(dat[, i], index = "shannon")
+    simpson <- vegan::diversity(dat[, i], index = "simpson")
+    invsimpson <- vegan::diversity(dat[, i], index = "invsimpson")
+    gini <- ineq::Gini(dat[, i])
     x <- data.frame(name, shannon, simpson, invsimpson, gini)
     df <- rbind(df, x)
   }

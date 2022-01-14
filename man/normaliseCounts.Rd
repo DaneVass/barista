@@ -20,6 +20,7 @@ Returns a data.frame object containing normalised barcode counts
 Normalise barcode counts within a DGEList object
 }
 \examples{
-normaliseCounts(dge, method = "cpm", threshold = 0)
+data(test.dge)
+normaliseCounts(test.dge, method = "cpm", threshold = 0)
 
 }

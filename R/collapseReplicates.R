@@ -14,7 +14,8 @@
 #' @export
 #'
 #' @examples
-#' collapseReplicates(object, groupby = object$counts$group, by = "mean")
+#' data(test.dge)
+#' collapseReplicates(test.dge, groupby = test.dge$samples$group, by = "mean")
 #'
 
 collapseReplicates <- function (object, groupby, run, renameCols = TRUE, show_reps = TRUE, by = "mean") {

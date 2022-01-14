@@ -6,7 +6,7 @@
 \usage{
 proportionalBubbleplot(
   counts.obj,
-  labels = T,
+  labels = TRUE,
   proportion.cutoff = 10,
   name = "Proportional Bubble Plot"
 )
@@ -27,5 +27,6 @@ Returns a bubbleplot of barcodes represented by proportion of total pool
 Generate proportional bubbleplots from raw count object with barcodes labelled above a specified threshold
 }
 \examples{
-proportionalBubbleplot(counts.obj, name = "Proportional Bubble Plot", label = T, proportion.cutoff = 10)
+data(test.counts)
+proportionalBubbleplot(test.counts, name = "Proportional Bubble Plot", proportion.cutoff = 10)
 }

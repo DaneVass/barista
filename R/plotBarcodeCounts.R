@@ -3,22 +3,26 @@
 #' Simple plot of total read counts per barcode in library
 #'
 #' @param counts data.frame of barcode count x sample
+#' @param order Logical. Order the dataset be decreasing abundance
+#' @param log10 Logical. log10 transform the data. Adds a pseudocount of 1
 #'
 #' @return Returns a plot of the read counts per barcode (row) in a data frame
 #' @export
 #'
 #' @examples
-#' plotBarcodeCounts(counts)
-#'
+#' data(test.counts)
+#' plotBarcodeCounts(test.counts)
+#' plotBarcodeCounts(test.counts, order = TRUE)
+#' plotBarcodeCounts(test.counts, order = TRUE, log10 = TRUE)
 
 plotBarcodeCounts <- function(counts, order = F, log10 = F){
   rowsums <- rowSums(counts)
 
-  if(isTRUE(log10)){
-    rowsums <- log10(rowsums)
+  if(log10){
+    rowsums <- log10(rowsums+1)
   }
 
-  if(isTRUE(order)){
+  if(order){
     ordered <- sort(rowsums, decreasing = T)
     barplot(ordered,
             las=2,

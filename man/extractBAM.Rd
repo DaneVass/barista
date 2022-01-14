@@ -32,6 +32,3 @@ barcode sequence and lintraceR DNA barcode ID.
 \description{
 Barcode extraction function for BAM alignment files
 }
-\examples{
-extractBAM(infile = fastq/bam, barcode_pattern = "ACTG")
-}

@@ -12,35 +12,41 @@
 #' @export
 #'
 #' @examples
-#' plotBarcodeFrequency(barcodes, samplename = "test sample")
+#' data(test.counts)
+#' plotReadCounts(test.dge$counts, group = test.dge$samples$Group)
 #'
 
-plotReadCounts <- function(counts, group, log10 = FALSE, legend = TRUE, order = TRUE){
+plotReadCounts <- function(counts, group = NULL, log10 = FALSE, legend = TRUE, order = TRUE){
 
-  cols <- as.factor(group)
+  if(!is.null(group)){
+    cols <- as.factor(group)
+  } else {
+    cols <- rep("Group 1", length(colnames(counts)))
+  }
+
   dat <- colSums(counts)
-  dat <- data.frame(sample = names(dat), counts = dat, group = factor(cols), row.names = NULL)
+  dat <- data.frame(sample = names(dat), counts = dat, group = cols, row.names = NULL)
 
-  if(isTRUE(order)){
+  if(order){
     dat$sample <- factor(dat$sample, levels = dat$sample[order(dat$group, decreasing = T)])
   }
 
   # plot data
-  p <- ggplot(data=dat, aes(y=sample, x=counts, fill = group)) +
-    geom_bar(stat="identity", width = .75) +
-    theme_bw() +
-    theme(axis.text.y = element_text(angle=0, vjust=0, hjust = 0.5)) +
-    theme(axis.text.x = element_text(size = 5)) +
-    ggtitle("Total Read Counts") +
-    xlim(0,max(dat$counts+100)) +
-    scale_fill_manual(values = rev(ggpubr::get_palette("npg", length(unique(dat$group)))))
+  p <- ggplot2::ggplot(data=dat, ggplot2::aes(y=sample, x=counts, fill = group)) +
+    ggplot2::geom_bar(stat="identity", width = .75) +
+    ggplot2::theme_bw() +
+    ggplot2::theme(axis.text.y = ggplot2::element_text(angle=0, vjust=0, hjust = 0.5)) +
+    ggplot2::theme(axis.text.x = ggplot2::element_text(size = 5)) +
+    ggplot2::ggtitle("Total Read Counts") +
+    ggplot2::xlim(0,max(dat$counts+100)) +
+    ggplot2::scale_fill_manual(values = rev(ggpubr::get_palette("npg", length(unique(dat$group)))))
 
   if(isTRUE(log10)){
-    p <- p + scale_x_log10()
+    p <- p + ggplot2::scale_x_log10()
   }
 
   if(legend == FALSE){
-    p <- p + theme(legend.position = "none")
+    p <- p + ggplot2::theme(legend.position = "none")
   }
 
   print(p)

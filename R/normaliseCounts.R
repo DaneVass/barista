@@ -10,7 +10,8 @@
 #' @export
 #'
 #' @examples
-#' normaliseCounts(dge, method = "cpm", threshold = 0)
+#' data(test.dge)
+#' normaliseCounts(test.dge, method = "cpm", threshold = 0)
 #'
 
 normaliseCounts <- function(dge, method = "cpm", threshold = 0){
@@ -20,7 +21,7 @@ normaliseCounts <- function(dge, method = "cpm", threshold = 0){
   dge <- dge[keeprows,]
 
   if(method == "cpm"){
-    norm.counts <- as.data.frame(cpm(dge))
+    norm.counts <- as.data.frame(edgeR::cpm(dge))
   }
 
   return(norm.counts)

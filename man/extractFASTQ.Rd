@@ -38,6 +38,3 @@ barcode sequence
 \description{
 Barcode extraction function for raw FASTQ files
 }
-\examples{
-extractFASTQ(fastq = file.fq.gz, barcode_pattern = "ACTG", constant = NULL, outfile = NULL, block_size = 1e6, verbose = FALSE, overwrite = FALSE)
-}

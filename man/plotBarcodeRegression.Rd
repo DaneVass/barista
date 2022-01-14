@@ -6,37 +6,36 @@
 \usage{
 plotBarcodeRegression(
   dge,
-  group,
-  title = paste("Regression plot:", group),
-  rug = T,
+  samp1 = NULL,
+  samp2 = NULL,
+  title = NULL,
   trendline = T,
-  stats = T,
-  trans = NULL
+  trans = NULL,
+  rug = F
 )
 }
 \arguments{
 \item{dge}{DGEList object containing grouping variable to fit linear model}
 
-\item{group}{sample group in dge$samples$group to plot correlation for. must be paired}
+\item{samp1}{name of sample 1. must be one of colnames(dge)}
+
+\item{samp2}{name of sample 2. must be one of colnames(dge)}
 
 \item{title}{desired name of output plot}
 
-\item{rug}{boolean. include geom_rug density information on the axes?}
+\item{trendline}{Logical. Include linear trendline using stat_smooth()}
 
-\item{trendline}{boolean. include linear trendline using stat_smooth()?}
+\item{trans}{From ggplot2. For continuous scales, the name of a transformation object or the object itself.}
 
-\item{stats}{boolean. include model stats in the plot subtitle?}
-
-\item{trans}{From ggplot2. For continuous scales, the name of a transformation object or the object itself. Built-in transformations include "asn", "atanh", "boxcox", "date", "exp", "hms", "identity", "log", "log10", "log1p", "log2", "logit", "modulus", "probability", "probit", "pseudo_log", "reciprocal", "reverse", "sqrt" and "time".}
-
-\item{fit}{fit of linear model between two samples generated using lm}
+\item{rug}{Logical. Include geom_rug density information on the axes?}
 }
 \value{
-Returns a scatterplot represented by proportion of total pool
+Returns a scatterplot of the two samples
 }
 \description{
-Generate a linear regression scatterplot from a model fit using lm() between two sets of sample counts.
+Generate a linear regression scatterplot for two sets of sample counts.
 }
 \examples{
-plotBarcodeRegression(fit, title = "Proportional Bubble Plot", rug = T)
+data(test.dge)
+plotBarcodeRegression(dge = test.dge, samp1 = "T0-1", samp2 = "T0-2")
 }

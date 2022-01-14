@@ -34,6 +34,7 @@ Collapse technical replicates in a DGEList or DESeqDataSet object by mean or sum
 Modified from collapseReplicates function from DESeq2 package to accept DGEList objects and to allow collapsing replicated by mean or sum.
 }
 \examples{
-collapseReplicates(object, groupby = object$counts$group, by = "mean")
+data(test.dge)
+collapseReplicates(test.dge, groupby = test.dge$samples$group, by = "mean")
 
 }

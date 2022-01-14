@@ -10,10 +10,8 @@
 #' @return Returns a barcode histogram plot of barcodes represented by proportion of total pool
 #' @export
 #' @examples
-#' plot_proportional_barcode(counts.obj, outfile, name = "Proportional Barcode Plot")
-
-
-
+#' data(test.counts)
+#' plotBarcodeHistogram(test.counts, sample = "T0-1", top = 10, name = "Barcode Histogram")
 
 plotBarcodeHistogram <- function(counts.obj, sample = NULL, top = 10, name = "Barcode Histogram"){
 
@@ -35,7 +33,7 @@ plotBarcodeHistogram <- function(counts.obj, sample = NULL, top = 10, name = "Ba
   all.colors <- c(top.colors, rep("grey80", length(rownames(barcodes.proportional)) - length(top.colors)))
   barcodes.proportional$color <- all.colors
 
-  par(mar=c(3,10,1.5,2) +.1)
+  #par(mar=c(3,10,1.5,2) +.1)
   barplot(as.matrix(barcodes.proportional[,1:length(names(barcodes.proportional))-1]),
           beside = F, horiz = T, border = T, col = barcodes.proportional$color,
           names.arg = colnames(barcodes.proportional)[1:length(colnames(barcodes.proportional))-1],

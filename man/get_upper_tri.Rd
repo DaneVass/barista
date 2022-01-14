@@ -15,8 +15,3 @@ Returns a matrix of correlation values with lower triangle values changed to NA
 \description{
 change lower triangle values in a mirrored matrix to NA
 }
-\examples{
-test.mat <- matrix(rnorm(10*10,mean=0,sd=2), 10, 10)
-get_upper_tri(test.mat)
-
-}

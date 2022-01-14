@@ -2,41 +2,70 @@
 #'
 #' process barcode reference file from raw sequencing datasets
 #'
-#' @param filepath path to starcode output for barcode library
+#' @param file path to starcode output for barcode library
+#' @param samplename name of reference library. Will be prefixed to each barcode in the reference
+#' @param cutoff rowsum cutoff defining barcodes to keep in the reference library
+#' @param header Logical. Does the input file contain a header line
+#'
 #' @return returns data frame containing barcode and read count in reference
+#'
 #' @export
+#'
 #' @examples
-#' process_barcode_reference(filepath = NULL)
+#' load(system.file("extdata", "test_raw_lib.rda", package = "barista"))
+#' processBarcodeLibrary(file = test.raw.lib, samplename = "Barcode", outdir = tempdir())
 
-process_barcode_reference <- function(filepath = NULL){
+processBarcodeLibrary <- function(file = NULL, samplename = "Barcode", cutoff = 10, header = FALSE, outdir = tempdir()){
   # imports barcode reference file from starcode or similar data frame.
   # Barcode reference should have two columns as below
   # Barcode_ID Count
   # Barcode_1   100
+  #
+  if (is.null(file)){
+    stop("Please include a valid path to starcode output")
+  }
 
-  require(data.table)
-  barcodefile <- fread(file = filepath, header = F)
-  barcodefile <- tail(barcodefile, -1) # get rid of the header line
-  colnames(barcodefile) <- c("ID", "Count")
+  if(class(file) == "data.frame"){
+    barcodes <- file
+  } else {
+    barcodes <- data.table::fread(file)
+  }
 
-  # Subset for barcodes over 2 counts
-  barcodefile <- barcodefile[barcodefile$Count >= 2,]
-  head(barcodefile)
-  sum(barcodefile$Count)
+  if (header) {
+    barcodes <- tail(barcodes, -1) # get rid of the header line
+  }
 
-  # order by decending barcode count
-  ordered <- order(barcodefile$Count, decreasing = T)
-  barcodefile <- barcodefile[ordered,]
+  # filter real barcodes
+  colnames(barcodes) <- c("Barcode", "Raw_count")
+  barcodes$Raw_count <- as.numeric(barcodes$Raw_count)
+  barcodes.out <- barcodes[which(barcodes$Raw_count >= cutoff),] # set arbitrary cutoff of 10 as default
 
-  # generate Rank and proportion information
-  barcodefile.sumreads <- sum(barcodefile$Count)
-  barcodefile$Rank <- paste("Barcode_rank_",seq(1,length(barcodefile$ID)), sep = "")
+  # Generate rank and proportion information
+  raw.total.count <- sum(barcodes$Raw_count)
+  raw.proportion <- 100*(barcodes$Raw_count/raw.total.count)
+  assertthat::are_equal(sum(raw.proportion), 100)
 
-  barcodefile$Proportion <- barcodefile$Count / sum(barcodefile$Count) * 100
-  sum(barcodefile$Proportion) # should total 100
-  head(barcodefile)
 
-  return(barcodefile)
+  filtered.total.count <- sum(barcodes.out$Raw_count)
+  filtered.proportion <- 100*(barcodes.out$Raw_count/filtered.total.count)
+  assertthat::are_equal(sum(filtered.proportion), 100)
+
+  filtered.counts.starcode <- sum(barcodes[barcodes$Raw_count >= 100,2])
+  proportion.starcode <- 100*(filtered.counts.starcode/raw.total.count)
+
+  # output barcode library as fasta
+  rank <- seq(1,length(rownames(barcodes.out)))
+  rank <- paste(samplename, rank, sep = '')
+  barcodes.out$Rank <- rank
+  fasta.name <- paste(samplename,".fasta", sep = '')
+
+  # output barcode library as fasta and txt
+  message(paste("Writing library to", outdir))
+  seqinr::write.fasta(sequences = as.list(barcodes.out$Barcode),
+                      names = barcodes.out$Rank,
+                      file.out = file.path(outdir,fasta.name), open = "w")
+  write.table(barcodes.out, file.path(outdir,paste(samplename, "_barcodes.txt", sep = "")), quote = F)
+
 }
 
 
@@ -52,7 +81,7 @@ writeFasta <- function(data, filename){
     fastaLines = c(fastaLines, as.character(paste(">", data[rowNum,1], sep = "")))
     fastaLines = c(fastaLines,as.character(data[rowNum,2]))
   }
-  fileConn<-file(filename)
+  fileConn <- file(filename)
   writeLines(fastaLines, fileConn)
   close(fileConn)
 }

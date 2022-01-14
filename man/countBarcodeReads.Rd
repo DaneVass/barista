@@ -21,6 +21,3 @@ Returns a data-frame containing the Barcode ID, and the count per sample.
 \description{
 Count number of occurences of each barcode in the reference library
 }
-\examples{
-countBarcodeReads(bam = bamfile, reference_library, mismatches = 1, outdir = "./", prefix = "map_barcode_reads")
-}
