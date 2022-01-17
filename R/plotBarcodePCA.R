@@ -49,7 +49,7 @@ plotBarcodePCA <- function(object, intgroup = "condition", col = "group", ntop =
   select <- order(rv, decreasing=TRUE)[seq_len(min(ntop, length(rv)))]
 
   # Correct for batch effects and perform a PCA on the data in assay(x) for the selected genes
-  pca <- prcomp(t(data[select,]))
+  pca <- stats::prcomp(t(data[select,]))
 
   # the contribution to the total variance for each component
   percentVar <- pca$sdev^2 / sum( pca$sdev^2 )
@@ -76,7 +76,7 @@ plotBarcodePCA <- function(object, intgroup = "condition", col = "group", ntop =
     return(PCAdata)
   } else {
     percentVar <- round(100 * attr(PCAdata, "percentVar"))
-    p <- ggplot2::ggplot(PCAdata, ggplot2::aes(x = PC1, y = PC2, color=PCAdata[,col], alpha=I(0.8))) +
+    p <- ggplot2::ggplot(PCAdata, ggplot2::aes(x = PCAdata$PC1, y = PCAdata$PC2, color=PCAdata[,col], alpha=I(0.8))) +
       ggplot2::geom_point(size=3) +
       ggplot2::xlab(paste0("PC1: ",percentVar[1],"% variance")) +
       ggplot2::ylab(paste0("PC2: ",percentVar[2],"% variance")) +

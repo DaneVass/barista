@@ -20,6 +20,8 @@ processBarcodeLibrary(
 \item{cutoff}{rowsum cutoff defining barcodes to keep in the reference library}
 
 \item{header}{Logical. Does the input file contain a header line}
+
+\item{outdir}{Desired output directory to save library files}
 }
 \value{
 returns data frame containing barcode and read count in reference

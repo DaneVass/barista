@@ -29,7 +29,7 @@ calcReplicateCorr <- function(dge, group, corr.thresh = 0.8, return = "all"){
 
   corrs <- lapply(unique(names(paired)), function(x){
     data <- as.data.frame(dge$counts[,dge$samples$group==as.character(x)])
-    fit <- lm(data[,1] ~ data[,2])
+    fit <- stats::lm(data[,1] ~ data[,2])
     adj.r2 <- summary(fit)$adj.r.squared
     corr <- sqrt(adj.r2)
   })

@@ -42,5 +42,5 @@ Map reads containing a lintraceR DNA barcode to a barcode reference library/fast
 \examples{
 load(system.file("extdata", "test_map.rda", package = "barista"))
 test.ref <- system.file("extdata", "barcode_lib_reference_test.fasta", package = "barista")
-mapBarcodeReads(reads = test.map, reference_fasta = test.ref, outdir = tempdir(), prefix = "map_barcode_reads")
+mapBarcodeReads(reads = test.map, reference_fasta = test.ref, outdir = tempdir(), prefix = "map")
 }

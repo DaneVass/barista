@@ -70,7 +70,8 @@ plotDetectedBarcodes <- function(counts, percentile = .95, plot = T){
 
   if (plot){
     # return a plot of the data
-    p <- ggplot2::ggplot(data=percentile.df, ggplot2::aes(x=Sample, y=Barcodes)) +
+    p <- ggplot2::ggplot(data=percentile.df, ggplot2::aes(x = percentile.df$Sample,
+                                                          y = percentile.df$Barcodes)) +
       ggplot2::geom_bar(stat="identity") +
       ggplot2::guides(fill="none") +
       ggplot2::theme_bw() +

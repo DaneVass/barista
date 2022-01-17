@@ -36,15 +36,19 @@ devtools::install_github("DaneVass/barista")
 ```{r example}
 library(barista)
 
-## plot from DGEList objects
-barista::calcReplicateCorr(test.dge)
-barista::plotDistances()
-
+data("test.counts")
 ## plot from counts files
 plotBarcodeBubble(test.counts)
 plotBarcodeCounts(test.counts)
 plotBarcodeHistogram(test.counts, sample = "T0-1", top = 100)
 plotReadCounts(test.counts, group = c("A", "A", "B", "B"))
+plotBarcodeCorrelation(test.counts)
+
+# comparative cumulative sum plots
+plotBarcodeCumSum(cpm(test.counts), sample1 = "T0-1", samples = c("T0-1", "T0b-1"))
+
+data("test.dge")
+plotBarcodeBoxplot(test.dge, barcodes = sample(rownames(test.dge),10), condition = test.dge$samples$Group)
 
 ```
 

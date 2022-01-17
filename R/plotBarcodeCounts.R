@@ -7,6 +7,7 @@
 #' @param log10 Logical. log10 transform the data. Adds a pseudocount of 1
 #'
 #' @return Returns a plot of the read counts per barcode (row) in a data frame
+#' @import ggplot2
 #' @export
 #'
 #' @examples

@@ -37,7 +37,7 @@ collapseReplicates <- function (object, groupby, run, renameCols = TRUE, show_re
   if(class(object)[1] == "DGEList"){
     countdata <- object$counts
   } else {
-    countdata <- assay(counts)
+    stop("please supply a valid DGEList object as input")
   }
 
   # combine by mean or sum
@@ -58,7 +58,7 @@ collapseReplicates <- function (object, groupby, run, renameCols = TRUE, show_re
 
   if (!missing(run)) {
     stopifnot(length(groupby) == length(run))
-    colData(collapsed)$runsCollapsed <- sapply(sp, function(i) paste(run[i],
+    collapsed$samples$runsCollapsed <- sapply(sp, function(i) paste(run[i],
                                                                      collapse = ","))
   }
 

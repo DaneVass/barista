@@ -6,6 +6,7 @@
 #' @param samplename name of reference library. Will be prefixed to each barcode in the reference
 #' @param cutoff rowsum cutoff defining barcodes to keep in the reference library
 #' @param header Logical. Does the input file contain a header line
+#' @param outdir Desired output directory to save library files
 #'
 #' @return returns data frame containing barcode and read count in reference
 #'

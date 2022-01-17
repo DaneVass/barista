@@ -21,5 +21,5 @@ Generate proportional timeseries plot from raw / normalised barcode count object
 }
 \examples{
 data(test.counts)
-plotBarcodeTimeseries(test.counts, name = "Proportional Bubble Plot", seed = 5)
+plotBarcodeTimeseries(test.counts[,1:4], name = "Proportional Timeseries Plot", seed = 5)
 }

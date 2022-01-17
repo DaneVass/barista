@@ -12,10 +12,10 @@
 
 #' @examples
 #' data(test.counts)
-#' plotBarcodeTimeseries(test.counts, name = "Proportional Bubble Plot", seed = 5)
+#' plotBarcodeTimeseries(test.counts[,1:4], name = "Proportional Timeseries Plot", seed = 5)
 
 plotBarcodeTimeseries <- function(counts.obj, name = "", seed = 5){
-    barcodes.proportional <- counts.obj
+    barcodes.proportional <- as.data.frame(counts.obj)
     barcodes.proportional <- sweep(barcodes.proportional,2,colSums(barcodes.proportional),`/`) * 100
     barcodes.proportional$barcode <- rownames(barcodes.proportional)
     barcodes.proportional.melted <- reshape2::melt(barcodes.proportional)
