@@ -27,7 +27,7 @@ plotBarcodeRegression <- function(dge, samp1 = NULL, samp2 = NULL, title = NULL,
 
   # plot fit data
   # generate lm fit
-  fit <- lm(plot.dat[,1] ~ plot.dat[,2])
+  fit <- stats::lm(plot.dat[,1] ~ plot.dat[,2])
 
   p <- ggplot2::ggplot(fit$model, ggplot2::aes_string(x = names(fit$model)[2], y = names(fit$model)[1])) +
     ggplot2::geom_point() +
@@ -45,7 +45,7 @@ plotBarcodeRegression <- function(dge, samp1 = NULL, samp2 = NULL, title = NULL,
   }
 
   if(isTRUE(rug)){
-    p <- p + ggplot2::geom_rug(col=rgb(.5,0,0,alpha=.2))
+    p <- p + ggplot2::geom_rug(col=grDevices::rgb(.5,0,0,alpha=.2))
   }
 
   if(is.null(title)){

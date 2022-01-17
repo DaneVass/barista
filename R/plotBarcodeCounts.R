@@ -25,14 +25,14 @@ plotBarcodeCounts <- function(counts, order = F, log10 = F){
 
   if(order){
     ordered <- sort(rowsums, decreasing = T)
-    barplot(ordered,
+    graphics::barplot(ordered,
             las=2,
             main="Total counts per barcode",
             axisnames = F,
             cex.axis=0.8,
             xlab = "Barcode - Descending order by total read count across samples", ylab = "Barcode total read count")
   } else {
-    barplot(rowsums,
+    graphics::barplot(rowsums,
             las=2,
             main="Total counts per barcode",
             axisnames = F,

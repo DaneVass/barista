@@ -29,7 +29,7 @@ plotBarcodeBoxplot <- function(dge.obj, barcodes, condition = NULL){
   if(is.null(condition)){
     # only one barcode given
     if (length(barcodes) == 1){
-      boxplot(counts[rownames(counts) %in% barcodes,], ylab = "Barcode counts", xlab = barcodes[1])
+      graphics::boxplot(counts[rownames(counts) %in% barcodes,], ylab = "Barcode counts", xlab = barcodes[1])
     } else{
       tab <- t(counts[rownames(counts) %in% barcodes,])
       stacked_tab <- reshape2::melt(tab)

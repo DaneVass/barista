@@ -95,7 +95,7 @@ plotLibraryCumSum <- function(barcodes, samplename = "Library", cutoff = 10){
   d <- data.frame(barcode=b, proportion=cumsum)
   dim(d)
 
-  p <- ggplot2::ggplot(d, ggplot2::aes(y=proportion, x=barcode)) +
+  p <- ggplot2::ggplot(d, ggplot2::aes(y = d$proportion, x = d$barcode)) +
     ggplot2::geom_point(stat = "identity", show.legend = F) +
     ggplot2::theme_bw() +
     ggplot2::scale_size_manual(values=c(2,2)) +

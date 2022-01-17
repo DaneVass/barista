@@ -14,7 +14,7 @@ collapseReplicates(
 )
 }
 \arguments{
-\item{object}{DGEList or DESeqDataSet object containing raw or normalised barcode counts with replicate grouping info in object metadata}
+\item{object}{DGEList object containing raw or normalised barcode counts with replicate grouping info in object metadata}
 
 \item{groupby}{a character vector of containing grouping information. Must be as long as the columns of object. Can pass a metadata column from object.}
 
@@ -30,7 +30,7 @@ collapseReplicates(
 Returns a dataframe of normalised counts for a sample
 }
 \description{
-Collapse technical replicates in a DGEList or DESeqDataSet object by mean or sum.
+Collapse technical replicates in a DGEList object by mean or sum.
 Modified from collapseReplicates function from DESeq2 package to accept DGEList objects and to allow collapsing replicated by mean or sum.
 }
 \examples{

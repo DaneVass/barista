@@ -24,9 +24,9 @@ barista is an R-based toolkit for the analysis of synthetic barcodes in the geno
 
 You can install the development version of barista from [GitHub](https://github.com/) with:
 
-``` r
-# install.packages("devtools")
-devtools::install_github("DaneVass/barista")
+```{r}
+install.packages("devtools")
+devtools::install_github("DaneVass/barista", dependencies = TRUE)
 ```
 
 ## Examples

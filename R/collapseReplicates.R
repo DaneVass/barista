@@ -1,9 +1,9 @@
 #' Collapse technical replicates
 #'
-#' Collapse technical replicates in a DGEList or DESeqDataSet object by mean or sum.
+#' Collapse technical replicates in a DGEList object by mean or sum.
 #' Modified from collapseReplicates function from DESeq2 package to accept DGEList objects and to allow collapsing replicated by mean or sum.
 #'
-#' @param object DGEList or DESeqDataSet object containing raw or normalised barcode counts with replicate grouping info in object metadata
+#' @param object DGEList object containing raw or normalised barcode counts with replicate grouping info in object metadata
 #' @param groupby a character vector of containing grouping information. Must be as long as the columns of object. Can pass a metadata column from object.
 #' @param run optional, the names of each unique column in object. if provided, a new column runsCollapsed will be added to the colData which pastes together the names of run
 #' @param renameCols boolean. whether to rename the columns of the returned object using the levels of the grouping factor
@@ -71,7 +71,7 @@ collapseReplicates <- function (object, groupby, run, renameCols = TRUE, show_re
   if(class(object)[1] == "DGEList"){
     stopifnot(sum(as.numeric(countdata)) == sum(as.numeric(collapsed$counts)))
   } else {
-    stopifnot(sum(as.numeric(countdata)) == sum(as.numeric(assay(collapsed))))
+    stop("output is not a valid DGEList object")
   }
   collapsed
 }

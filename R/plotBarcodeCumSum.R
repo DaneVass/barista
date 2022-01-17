@@ -43,11 +43,11 @@ plotBarcodeCumSum <- function(counts, sample1 = NULL, samples = NULL) {
     # add 0's in the first for plotting
     x <- rep(0, ncol(df))
     df <- rbind(x, df)
-    lines(df$CumSum1,df$CumSum2,type='l',lwd=3,col = cols[i])
+    graphics::lines(df$CumSum1,df$CumSum2,type='l',lwd=3,col = cols[i])
     i=i+1
   }
-  legend(0,1,legend=samples,col = cols,lty=1)
-  abline(a=0,b=1,col='black')
+  graphics::legend(0,1,legend=samples,col = cols,lty=1)
+  graphics::abline(a=0,b=1,col='black')
 }
 
 #

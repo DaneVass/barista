@@ -33,7 +33,7 @@ processBarcodeLibrary <- function(file = NULL, samplename = "Barcode", cutoff = 
   }
 
   if (header) {
-    barcodes <- tail(barcodes, -1) # get rid of the header line
+    barcodes <- utils::tail(barcodes, -1) # get rid of the header line
   }
 
   # filter real barcodes
@@ -65,7 +65,7 @@ processBarcodeLibrary <- function(file = NULL, samplename = "Barcode", cutoff = 
   seqinr::write.fasta(sequences = as.list(barcodes.out$Barcode),
                       names = barcodes.out$Rank,
                       file.out = file.path(outdir,fasta.name), open = "w")
-  write.table(barcodes.out, file.path(outdir,paste(samplename, "_barcodes.txt", sep = "")), quote = F)
+  utils::write.table(barcodes.out, file.path(outdir,paste(samplename, "_barcodes.txt", sep = "")), quote = F)
 
 }
 

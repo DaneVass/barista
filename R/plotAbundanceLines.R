@@ -41,6 +41,7 @@ plotAbundanceLines <- function(dge, condition, condition_names, plot_type = 'DEG
   df <- as.data.frame(t(df))
   df <- df[names(df) %in% condition_names]
   filtered_df <- utils::head(df[order(df[,1],df[,2],decreasing=T),],nrow(df)*keep)
+
   ##Go through each row and determine if a value is zero
   row_sub = apply(filtered_df, 1, function(row) all(row !=0 ))
   ##Subset as usual

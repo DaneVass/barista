@@ -26,15 +26,15 @@ plotBarcodeHistogram <- function(counts.obj, sample = NULL, top = 10, name = "Ba
     }
   }
 
-  top.bc <- head(rowSums(barcodes.proportional), n = top)
+  top.bc <- utils::head(rowSums(barcodes.proportional), n = top)
 
   # set colors
-  top.colors <- rainbow(length(names(top.bc)))
+  top.colors <- grDevices::rainbow(length(names(top.bc)))
   all.colors <- c(top.colors, rep("grey80", length(rownames(barcodes.proportional)) - length(top.colors)))
   barcodes.proportional$color <- all.colors
 
   #par(mar=c(3,10,1.5,2) +.1)
-  barplot(as.matrix(barcodes.proportional[,1:length(names(barcodes.proportional))-1]),
+  graphics::barplot(as.matrix(barcodes.proportional[,1:length(names(barcodes.proportional))-1]),
           beside = F, horiz = T, border = T, col = barcodes.proportional$color,
           names.arg = colnames(barcodes.proportional)[1:length(colnames(barcodes.proportional))-1],
           las=1, cex.names = .5, cex.axis = 0.6, xlab = "Barcode proportion (%)", main = name)

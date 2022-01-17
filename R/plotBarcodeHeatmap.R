@@ -24,14 +24,14 @@
 plotBarcodeHeatmap <- function(counts, N, name = "CPM", show_bc = FALSE){
     bc <- c()
     for (s in colnames(counts)){
-        top_bc = head(rownames(counts[order(counts[,s],decreasing = T),]), N)
+        top_bc = utils::head(rownames(counts[order(counts[,s],decreasing = T),]), N)
         bc <- c(bc, top_bc)
     }
     tab = counts[rownames(counts) %in% bc,]
     suppressMessages(ComplexHeatmap::Heatmap(as.matrix(tab),
                                              name = name,show_row_names = show_bc,
                                              cell_fun = function(j, i, x, y, w, h, fill) {
-                                                 if(tab[i, j] %in% head(sort(tab[,j], decreasing=TRUE), n=N)) {
+                                                 if(tab[i, j] %in% utils::head(sort(tab[,j], decreasing=TRUE), n=N)) {
                                                      grid::grid.text("*", x, y, vjust = 0.8)
                                                  }}))
 }

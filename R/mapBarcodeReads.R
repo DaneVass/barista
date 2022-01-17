@@ -102,8 +102,8 @@ mapBarcodeReads <- function(reads, bowtie_index = NULL, mismatches = 2, threads 
 
     # keep only unique entries by 10X Cell ID, 10X UMI and reference barcode ID
     if ("Cell.10X.Barcode" %in% colnames(current.df)) {
-        current.df <- dplyr::distinct(current.df, Cell.10X.Barcode, Read.10X.UMI,
-                                      referenceID, .keep_all = TRUE)
+        current.df <- dplyr::distinct(current.df, current.df$Cell.10X.Barcode, current.df$Read.10X.UMI,
+                                      current.df$referenceID, .keep_all = TRUE)
     }
 
     # generate raw counts

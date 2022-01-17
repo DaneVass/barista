@@ -78,7 +78,7 @@ plotDetectedBarcodes <- function(counts, percentile = .95, plot = T){
       ggplot2::theme(axis.text.x = ggplot2::element_text(angle=90, vjust=-.5, hjust = 1)) +
       ggplot2::ggtitle("Number of detected barcodes per sample") +
       ggplot2::ylim(0,max(percentile.df$Barcodes+25)) +
-      ggplot2::geom_text(ggplot2::aes(label = Barcodes, y = Barcodes + 0.05), position = ggplot2::position_dodge(0.9), vjust = -0.2)
+      ggplot2::geom_text(ggplot2::aes(label = percentile.df$Barcodes, y = percentile.df$Barcodes + 0.05), position = ggplot2::position_dodge(0.9), vjust = -0.2)
 
     return(p)
 

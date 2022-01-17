@@ -1,5 +1,5 @@
 ---
-title: "barista: Analysis of synthetic DNA barcodes"
+title: "barista: preprocessing datasets "
 author: "Dane Vassiliadis"
 output: 
   rmarkdown::html_document:
@@ -9,20 +9,10 @@ output:
     highlight: tango 
 date: June 27, 2019
 vignette: >
-  %\VignetteIndexEntry{barista-vignette}
+  %\VignetteIndexEntry{barista-preprocessing}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---
-
-# Quickstart Guide
-
-## Introduction
-
-### A brief introduction to DNA barcoding technology
-The ability to accurately track the progeny of a clone within a population of cells is necessary to dissect biological phenomena at single cell resolution. Several technologies have emerged that enable lineage tracing in cell populations. Many of these involve the insertion or generation of a unique sequence of DNA that marks the genome of each cell and which can be tracked using high throughput sequencing technologies. These markers are often termed DNA barcodes as they essentially consist of a stretch of degenerate DNA bases which is unique to that cell. This degenerate sequence of bases affords considerable complexity to the barcode library and uniqueness to each barcode. Many current DNA barcoding methodologies utilise stretches of up to 60 bases for their barcode region allowing an astronomical theoretical number of individual barcodes to be generated from combinations of the four nucleotides that comprise DNA: adenine (A), thymine (T), guanine (G) and cytosine (C). In reality, the need to synthesize and clone these barcodes into viral vectors reduces the overall complexity that can be achieved. Nevertheless, several barcode constructs exist with barcode complexities reaching 10^6 unique barcodes or higher.
-
-### What is barista
-`barista` was built out of our need to develop robust tools for the analysis of DNA barcoding datasets in a large number of samples. The package consists of a suite of functions to annotate, analyse and plot DNA barcodes that are read out using common high throughput sequencing methodologies such as those obtained from Illumina machines. Furthermore, the rapid rise of single cell technologies has necessitated the development of methods that can process and visualise DNA barcode data at single cell resolution. New methods incorporate barcode sequences into the three prime region of a reporter gene construct that is transcribed under the direction of a constitutive promoter. This results in transcription of the barcode which can be detected in 3 prime single cell RNA sequencing datasets. Recent examples of this are SPLINTR (ref), LARRY (ref) and CellTagging (ref). barista contains additional methods to process and visualise these datatypes with the aim of opening up this technology to the broader scientific community. This vignette will showcase the capabilities of the barista package for processing and analysing synthetic barcode information at the bulk and single cell levels.
 
 ## Getting started
 The `barista` package is optimised for use with SPLINTR lineage barcode libraries (ref) however the functions within can be adapted to any DNA barcoding methodology that utiilses random DNA barcodes.
@@ -62,7 +52,7 @@ Two days after transduction, two sets of 5000 mCHERRY positive cells were sorted
 Barcode information can be extracted from raw fastq files and summarised into a table of counts per barcode as follows
 
 Firstly we define the expected barcode pattern and the upstream and downstream constant regions that flank true barcodes. And then extract reads containing this barcode pattern using the `extractbaristaeads` function
-```{r}
+```{r, eval=FALSE}
 pattern <- "([ACTG][ACTG][GC][AT][GC][ACTG][ACTG][AT][GC][AT]){3,6}"
 fastq <- system.file("extdata", "test_extract_75bp_single-end.fastq.gz", package = "barista", mustWork = T)
 constant <- toupper("tgaccatgtacgattgacta")
@@ -74,7 +64,7 @@ test.extract
 ```
 
 Following barcode extraction we make use of previously generated library of reference barcodes and map our extracted sequences to this reference using `mapbaristaeads`. True barcodes will align without mismatches. reads containing sequencing errors or false barcode sequences that snuck through the extraction step will be filtered out here. 
-```{r}
+```{r, eval=FALSE}
 test.map <- barista::mapbaristaeads(reads = test.extract,
                                       bowtie_index = "../data/bowtie/index",
                                       mismatches = 1,
@@ -85,7 +75,7 @@ test.map
 ```
 
 If a bowtie reference has not yet been generated we can specify `reference_fasta` in place of `bowtie_index` and it will be generated for us
-```{r}
+```{r, eval=FALSE}
 reference.fa <- system.file("extdata", "barcode_lib_reference_test.fasta", package = "barista", mustWork = T)
 test.map <- barista::mapBarcodeReads(reads = test.extract,
                                       bowtie_index = NULL,
@@ -98,7 +88,7 @@ test.map
 
 `mapBarcodeReads` takes the liberty of counting the number of occurrences of each barcode for us and saving the output in a file. 
 We can easily load and examine the final count data here.
-```{r}
+```{r, eval=FALSE}
 test.counts <- utils::read.delim("./test_map_counts.csv", header = T, sep = ",", row.names = 1)
 test.counts %>% tibble::rownames_to_column() %>% dplyr::arrange(dplyr::desc(mapped))
 ```
@@ -109,7 +99,7 @@ For large numbers of samples it can be cumbersome and time consuming to process 
 We have developed BARtab, a Nextflow (ref) pipeline for the preprocessing of DNA barcoding datasets from bulk and single-cell experiments. 
 The pipeline and associated running instructions can be found at `<insert link to barcode-seq pipeline>`  
 
-```{bash}
+```{bash, eval=FALSE}
 # ToDo
 # example running snakemake barcode-seq workflow
 
