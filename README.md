@@ -16,7 +16,7 @@ You can install the development version of barista from
 
 ``` r
 # install.packages("devtools")
-devtools::install_github("DaneVass/barista")
+devtools::install_github("DaneVass/barista",  dependencies = TRUE)
 ```
 
 ## Examples
