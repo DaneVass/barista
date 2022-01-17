@@ -11,6 +11,9 @@
 # Example code in package build process
 *-Ex.R
 
+# R build files
+.Rbuildignore
+
 # Output files from R CMD build
 /*.tar.gz
 
@@ -37,3 +40,9 @@ vignettes/*.pdf
 
 # R Environment Variables
 .Renviron
+
+# macOS files
+.DS_Store
+
+# project files
+barista.Rproj
